@@ -1,8 +1,7 @@
 ---
 layout: default
-title: About
+title: "About"
 ---
-
 {% include JB/setup %}
 
 ![eco-wordle](https://achazhardenberg.github.io/ecostats.co/assets/eco_wordle.jpg)  
