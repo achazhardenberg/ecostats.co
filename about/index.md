@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Welcome to the *Ecological Data Management and Analysis* Web page! 
+tagline: 
 ---
 {% include JB/setup %}
 
