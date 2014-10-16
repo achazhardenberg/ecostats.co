@@ -3,7 +3,6 @@
 permalink: /:categories/:year/:month/:day/:title 
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
-highlighter: pygments
 
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
@@ -14,8 +13,10 @@ author :
   name : Achaz von Hardenberg
   email : achaz.hardenberg@unito.it
   github : achazhardenberg
-  twitter : @achazhardenberg
+  twitter : achazhardenberg
   feedburner : feedname
+
+paginate: 10
 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt 
@@ -80,13 +81,13 @@ JB :
   # Set 'provider' to false to turn commenting off globally.
   #
   comments :
-    provider : disqus
+    provider : intensedebate
     disqus :
       short_name : jekyllbootstrap
     livefyre :
       site_id : 123
     intensedebate :
-      account : 123abc
+      account : achazhardenberg
     facebook :
       appid : 123
       num_posts: 5
