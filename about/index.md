@@ -7,8 +7,7 @@ tagline:
 
 ![eco-wordle](https://achazhardenberg.github.io/ecostats.co/assets/eco_wordle.jpg)  
 
-Welcome to the *Ecological Data Management and Analysis* Web page!
-=======================================================
+# Welcome to the *Ecological Data Management and Analysis* Web page!
 
 This course intends to gently introduce data management and modern analysis techniques and concepts to students in the Natural Sciences. The course is taught in a traditional way at the University of Torino (see the official course page [here](http://naturali.campusnet.unito.it/do/corsi.pl/Show?_id=af34)) but all course materials, including videos of the lessons, will be accessible online under a Creative Commons licence, both here as well as on the [Moodle platform](http://naturali.i-learn.unito.it/course/view.php?id=74) of the University of Torino (If you do not have a valid University of Torino account, you can access as Guest).
 
