@@ -1,9 +1,14 @@
 ---
-title: "Installing R and RStudio"
-author: "Achaz von Hardenberg"
-date: "16 Oct 2014"
-output: html_document
+layout: post
+title: "Installing R and R Studio"
+post_author: "Achaz von Hardenberg"
+description: ""
+category: r
+tags: [r, JAGS, tutorial]
 ---
+{% include JB/setup %}
+
+*Achaz von Hardenberg*  
 
 The "Ecological Data Management and Analysis" Course will be very practical and interactive. We will thus learn to use [R](http://www.r-project.org), probably the most extensively used statistical language worldwide.  We will also use [RStudio Desktop](http://www.rstudio.com), a very powerful and user-friendly interface to the R environment. Both programs are open-source and you can thus download, install and use them freely. They are also available for all the most commonly used operating systems (Windows, Mac OS or Linux). 
   
