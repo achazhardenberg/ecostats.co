@@ -1,9 +1,7 @@
 ---
-layout: page
+layout: default
 title: Welcome to the Ecological Data Management and Analysis Web page! 
-tagline: 
 ---
-{% include JB/setup %}
 
 ![eco-wordle](https://achazhardenberg.github.io/ecostats.co/assets/eco_wordle.jpg)  
 
