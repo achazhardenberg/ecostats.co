@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Installing R and R Studio"
+title: "Installing R and RStudio"
 post_author: "Achaz von Hardenberg"
 description: ""
 category: r
-tags: [r, JAGS, tutorial]
+tags: [Lesson 1, R, RStudio]
 ---
 {% include JB/setup %}
 
