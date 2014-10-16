@@ -26,7 +26,7 @@ paginate: 10
 # Else if you are pushing to username.github.io, replace with your username.
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
-production_url : http://username.github.io
+production_url : http://www.ecostats.co
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
@@ -121,10 +121,10 @@ JB :
   # Settings for all other include helpers can be defined by creating 
   # a hash with key named for the given helper. ex:
   #
-        pages_list :
-        About : '/About'
-        Archive : ‘/archive’
-	Tags : ‘/tags’
+  #     pages_list :
+  #     About : '/about'
+  #     Archive : ‘/archive’
+  #	    Tags : ‘/tags’
 
   # Setting any helper's provider to 'custom' will bypass the helper code
   # and include your custom code. Your custom file must be defined at:
