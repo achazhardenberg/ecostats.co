@@ -3,7 +3,7 @@ layout: post
 title: "Installing R and RStudio"
 post_author: "Achaz von Hardenberg"
 description: ""
-category: Lesson 1
+category: Lesson.1
 tags: [R, RStudio]
 ---
 {% include JB/setup %}
