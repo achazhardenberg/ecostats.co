@@ -26,7 +26,7 @@ Hereafter I will provide the necessary steps to install R on a Windows machine (
 6. n installation window will open. Follow all the suggestions and instructions, always replying "OK".
 7. You are done! It was that easy! ;)
 
-After having installed R, install RStudio Desktop, which you can download it from here: <http://www.rstudio.com/products/rstudio/download/>  
+After having installed R, install RStudio Desktop, which you can download from here: <http://www.rstudio.com/products/rstudio/download/>  
 
 Again choose your operative system in the list under "Installers for ALL Platforms".
 The rest of the installation is very similar to what described above for R. however, if something is unclear or does not work, please feel free to drop me a line via email!
