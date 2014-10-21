@@ -21,7 +21,7 @@ But to find an answer to any of the above or other scientific questions, you wil
 
 >"Ecological data is a collection of qualitative and quantitative characteristics of observations of the natural phenomena about which we want to draw conclusions"  
 
-In the statistical jargon, these qualitative and quantitative characterstics are called **variables**, because they can assume different categorical or numeric values, in contrast with **constants** whih are values fixed to a specific value (e.g. in the physical world the speed of light and the gravitational constant G). For example, we might be interested in knowing how fast cheetahs can run.  
+In the statistical jargon, these qualitative and quantitative characterstics are called **variables**, because they can assume different categorical or numeric values, in contrast with **constants** which are values fixed to a specific value (e.g. in the physical world the speed of light and the gravitational constant G). For example, we might be interested in knowing how fast cheetahs can run.  
 
 ![chetaah video](http://youtu.be/U6K-F9Bjl8s)
   
