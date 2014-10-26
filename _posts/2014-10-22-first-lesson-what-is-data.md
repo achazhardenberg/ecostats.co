@@ -23,9 +23,10 @@ But to find an answer to any of the above or other scientific questions, you wil
 
 In the statistical jargon, these qualitative and quantitative characterstics are called **variables**, because they can assume different categorical or numeric values, in contrast with **constants** which are values fixed to a specific value (e.g. in the physical world the speed of light and the gravitational constant G). For example, we might be interested in knowing how fast cheetahs can run.  
 
->"Who wins the race? Usain Bolt or the Cheetah?" 
-<iframe width="560" height="315" src="//www.youtube.com/embed/U6K-F9Bjl8s" frameborder="0" allowfullscreen></iframe>
+>"Who wins the race? Usain Bolt or the Cheetah?"  
   
+<iframe width="560" height="315" src="//www.youtube.com/embed/U6K-F9Bjl8s" frameborder="0" allowfullscreen></iframe>
+    
 If we measure the running speed[^5] of say 10 cheetahs we will get 10 different measures, and if we organized well our data collection, these 10 measurements will be a **random sample** of the running speed of the **population** of all cheetahs in the world[^6]. Instead, if we measure the speed of 10 light beams, we will always get the same constant measure. In experimental settings, some variables are kept constant on purpose, to test the effect of one variable on an other under controlled conditions[^7]. 
   
 From the above definition of ecological data we already can see that variables can be **qualitative** (e.g. sex, color, habitat type) or **quantitative** (any measurable characteristic such as weight, giraffe neck length, number of counted ibex or the running speed of cheetahs but also **events**: the presence or absence of a species in an area or "dead or alive" data (survival) of individually tagged subjects). Qualitative characteristics represent **categorial variables**, defined, in statistical languages such as [R](http://www.r-project.org), as **factors**. Quantitative variables can be **continuous** or **discrete**.  
