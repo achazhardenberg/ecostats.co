@@ -1,0 +1,19 @@
+---
+title: "Review of basic statistical concepts"
+subtitle: "Ecological Data Management and Analysis"
+author: "Achaz von Hardenberg"
+date: "10 Nov 2014"
+output:
+  ioslides_presentation:
+    logo: eco_wordle.jpg
+    widescreen: true
+    incremental: true
+---  
+
+## Ok, we have got the data... and now?
+  
+<iframe width="420" height="315" src="//www.youtube.com/embed/BBMVraJZoAU" frameborder="0" allowfullscreen></iframe>
+  
+---  
+  
+## What is probabilty? {.build}

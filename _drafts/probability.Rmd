@@ -1,0 +1,348 @@
+---
+title: "Probability in a Nutshell"
+subtitle: "Ecological Data Management and Analysis"
+author: "Achaz von Hardenberg"
+date: "3 Nov 2014"
+output:
+  ioslides_presentation:
+    logo: eco_wordle.jpg
+    widescreen: true
+    incremental: true
+---
+
+## What is probabilty? {.build}
+
+Probability theory is the mathematical abstraction formalizing the mathematics of uncertain events
+
+In Southern Chile sheep can be predated by Culpeo foxes, pumas or stray dogs:
+  
+Predation by puma is an **event**  
+  
+to be predated or not is an **outcome** of the above event
+  
+**sample space**: the set of all possible outcomes of a specific event: ex. sheep predated by fox, puma, dog or the probability of a coin being flipped head or tail
+ 
+## What is the probabilty that flipping a coin it comes out "head"? {.build}
+ 
+One common way to interpret *probability* is as the  
+  
+*long run frequency of an outcome in a series of repeated trials*
+
+Which means: the probability that the coin comes out head is equal to the proportion of times it comes out "head", repeating the coin flipping experiment infinite times (frequency interpretation of probability).
+
+## Running proportion of heads flipping a coin
+
+trial:      
+```{r echo=FALSE }
+  set.seed(4564563)
+  heads<-rbinom(700,1,0.5)
+  trial<-(0)
+  heads.df<-data.frame(trial,heads)
+  heads.df <- within(heads.df, prop <- cumsum(heads)/trial)
+  plot(heads.df$prop~log(heads.df$trial),ylim=c(0,1),xlim=c(0,7),xlab="Trial number (log scale)",ylab="Proportion of heads")
+  cord<-xy.coords(-100:700,0.5:0.5,recycle=T)
+  lines(cord,type="l",col="red")
+```
+
+## Running proportion of heads flipping a coin
+trial: 1    
+```{r echo=FALSE }
+  set.seed(4564563)
+  heads<-rbinom(700,1,0.5)
+  trial<-(1)
+  heads.df<-data.frame(trial,heads)
+  heads.df <- within(heads.df, prop <- cumsum(heads)/trial)
+  plot(heads.df$prop~log(heads.df$trial),ylim=c(0,1),xlim=c(0,7),xlab="Trial number (log scale)",ylab="Proportion of heads")
+  cord<-xy.coords(-100:700,0.5:0.5,recycle=T)
+  lines(cord,type="l",col="red")
+```
+
+## Running proportion of heads flipping a coin
+trial: 2    
+```{r echo=FALSE }
+  set.seed(4564563)
+  heads<-rbinom(700,1,0.5)
+  trial<-(1:2)
+  heads.df<-data.frame(trial,heads)
+  heads.df <- within(heads.df, prop <- cumsum(heads)/trial)
+  plot(heads.df$prop~log(heads.df$trial),ylim=c(0,1),xlim=c(0,7),xlab="Trial number (log scale)",ylab="Proportion of heads")
+  cord<-xy.coords(-100:700,0.5:0.5,recycle=T)
+  lines(cord,type="l",col="red")
+```
+
+## Running proportion of heads flipping a coin
+trial:3        
+```{r echo=FALSE }
+  set.seed(4564563)
+  heads<-rbinom(3,1,0.5)
+  trial<-(1:3)
+  heads.df<-data.frame(trial,heads)
+  heads.df <- within(heads.df, prop <- cumsum(heads)/trial)
+  plot(heads.df$prop~log(heads.df$trial),ylim=c(0,1),xlim=c(0,7),xlab="Trial number (log scale)",ylab="Proportion of heads")
+  cord<-xy.coords(-100:700,0.5:0.5,recycle=T)
+  lines(cord,type="l",col="red")
+```
+
+## Running proportion of heads flipping a coin
+trial:4        
+```{r echo=FALSE }
+  set.seed(4564563)
+  heads<-rbinom(4,1,0.5)
+  trial<-(1:4)
+  heads.df<-data.frame(trial,heads)
+  heads.df <- within(heads.df, prop <- cumsum(heads)/trial)
+  plot(heads.df$prop~log(heads.df$trial),ylim=c(0,1),xlim=c(0,7),xlab="Trial number (log scale)",ylab="Proportion of heads")
+  cord<-xy.coords(-100:700,0.5:0.5,recycle=T)
+  lines(cord,type="l",col="red")
+```
+
+## Running proportion of heads flipping a coin
+trial:5        
+```{r echo=FALSE }
+  set.seed(4564563)
+  heads<-rbinom(5,1,0.5)
+  trial<-(1:5)
+  heads.df<-data.frame(trial,heads)
+  heads.df <- within(heads.df, prop <- cumsum(heads)/trial)
+  plot(heads.df$prop~log(heads.df$trial),ylim=c(0,1),xlim=c(0,7),xlab="Trial number (log scale)",ylab="Proportion of heads")
+  cord<-xy.coords(-100:700,0.5:0.5,recycle=T)
+  lines(cord,type="l",col="red")
+```
+
+## Running proportion of heads flipping a coin
+trial:6        
+```{r echo=FALSE }
+  set.seed(4564563)
+  heads<-rbinom(6,1,0.5)
+  trial<-(1:6)
+  heads.df<-data.frame(trial,heads)
+  heads.df <- within(heads.df, prop <- cumsum(heads)/trial)
+  plot(heads.df$prop~log(heads.df$trial),ylim=c(0,1),xlim=c(0,7),xlab="Trial number (log scale)",ylab="Proportion of heads")
+  cord<-xy.coords(-100:700,0.5:0.5,recycle=T)
+  lines(cord,type="l",col="red")
+```
+
+## Running proportion of heads flipping a coin
+trial:7        
+```{r echo=FALSE }
+  set.seed(4564563)
+  heads<-rbinom(7,1,0.5)
+  trial<-(1:7)
+  heads.df<-data.frame(trial,heads)
+  heads.df <- within(heads.df, prop <- cumsum(heads)/trial)
+  plot(heads.df$prop~log(heads.df$trial),ylim=c(0,1),xlim=c(0,7),xlab="Trial number (log scale)",ylab="Proportion of heads")
+  cord<-xy.coords(-100:700,0.5:0.5,recycle=T)
+  lines(cord,type="l",col="red")
+```
+
+## Running proportion of heads flipping a coin
+trial:8        
+```{r echo=FALSE }
+  set.seed(4564563)
+  heads<-rbinom(8,1,0.5)
+  trial<-(1:8)
+  heads.df<-data.frame(trial,heads)
+  heads.df <- within(heads.df, prop <- cumsum(heads)/trial)
+  plot(heads.df$prop~log(heads.df$trial),ylim=c(0,1),xlim=c(0,7),xlab="Trial number (log scale)",ylab="Proportion of heads")
+  cord<-xy.coords(-100:700,0.5:0.5,recycle=T)
+  lines(cord,type="l",col="red")
+```
+
+## Running proportion of heads flipping a coin
+trial:9       
+```{r echo=FALSE }
+  set.seed(4564563)
+  heads<-rbinom(9,1,0.5)
+  trial<-(1:9)
+  heads.df<-data.frame(trial,heads)
+  heads.df <- within(heads.df, prop <- cumsum(heads)/trial)
+  plot(heads.df$prop~log(heads.df$trial),ylim=c(0,1),xlim=c(0,7),xlab="Trial number (log scale)",ylab="Proportion of heads")
+  cord<-xy.coords(-100:700,0.5:0.5,recycle=T)
+  lines(cord,type="l",col="red")
+```
+
+## Running proportion of heads flipping a coin
+trial:10  
+```{r echo=FALSE }
+  set.seed(4564563)
+  heads<-rbinom(700,1,0.5)
+  trial<-(1:10)
+  heads.df<-data.frame(trial,heads)
+  heads.df <- within(heads.df, prop <- cumsum(heads)/trial)
+  plot(heads.df$prop~log(heads.df$trial),ylim=c(0,1),xlim=c(0,7),xlab="Trial number (log scale)",ylab="Proportion of heads")
+  cord<-xy.coords(-100:700,0.5:0.5,recycle=T)
+  lines(cord,type="l",col="red")
+```
+
+## Running proportion of heads flipping a coin
+trial:50         
+```{r echo=FALSE }
+  set.seed(4564563)
+  heads<-rbinom(50,1,0.5)
+  trial<-(1:50)
+  heads.df<-data.frame(trial,heads)
+  heads.df <- within(heads.df, prop <- cumsum(heads)/trial)
+  plot(heads.df$prop~log(heads.df$trial),ylim=c(0,1),xlim=c(0,7),xlab="Trial number (log scale)",ylab="Proportion of heads")
+  cord<-xy.coords(-100:700,0.5:0.5,recycle=T)
+  lines(cord,type="l",col="red")
+```
+
+## Running proportion of heads flipping a coin
+trial:100   
+```{r echo=FALSE }
+  set.seed(4564563)
+  heads<-rbinom(100,1,0.5)
+  trial<-(1:100)
+  heads.df<-data.frame(trial,heads)
+  heads.df <- within(heads.df, prop <- cumsum(heads)/trial)
+  plot(heads.df$prop~log(heads.df$trial),ylim=c(0,1),xlim=c(0,7),xlab="Trial number (log scale)",ylab="Proportion of heads")
+  cord<-xy.coords(-100:700,0.5:0.5,recycle=T)
+  lines(cord,type="l",col="red")
+```
+
+## Running proportion of heads flipping a coin
+trial:500    
+```{r echo=FALSE }
+  set.seed(4564563)
+  heads<-rbinom(500,1,0.5)
+  trial<-(1:500)
+  heads.df<-data.frame(trial,heads)
+  heads.df <- within(heads.df, prop <- cumsum(heads)/trial)
+  plot(heads.df$prop~log(heads.df$trial),ylim=c(0,1),xlim=c(0,7),xlab="Trial number (log scale)",ylab="Proportion of heads")
+  cord<-xy.coords(-100:700,0.5:0.5,recycle=T)
+  lines(cord,type="l",col="red")
+```
+
+## Basic probability laws {.build}
+
+Mathematical laws ruling the the combination of  *events*
+
+**Mutually exclusive events**
+
+Predation by Culpeo fox or by puma are mutually exclusive events (a single sheep can not be predated by both)
+
+**Sheep Predation Probabilities by different predators**
+
+Symbol|Species|Probability|
+-|-----|-----|
+F|Fox  |0.026|
+P|Puma |0.010|
+D|Dog  |0.063|
+
+## Basic probability laws {.build}
+ 
+What is the probability to be predated by a fox (F) *or* by a puma (P)?  
+
+$P(F \cup P) = P(F)+P(P)$     
+
+The $\cup$ symbol means 'Union' 
+
+$P(Fox \ or \ Puma) = 0.026+0.010$
+
+$P(Fox \ or \ Puma) = 0.036$
+
+What is the probability to be predated by any predator?
+
+$P(Fox \ or \ Puma \ or \ Dog) = P(Fox)+P(Puma)+P(Dog)$
+
+$P(Fox \ or \ Puma \ or \ Dog) = 0.026+0.010+0.063 = `r 0.026+0.010+0.063`$
+
+## Non-mutually exclusive events {.build}
+
+Sheep can be white or black  
+The color (C) of the sheep is the *event* and black or white are the two possible  *outcomes*
+
+What is the probabilty that a sheep is black?  
+
+Let's say it's $P(C_{black}) = 0.2$
+
+> **The probabilities of all the possible outcomes sum up to 1**
+
+What is the probabilty that a sheep is white?
+
+$P(C_{white}) = 1 - P(C_{black}) = 0.8$
+
+## Non-mutually exclusive events {.build}
+
+What is the probabilty that a sheep is of a particular color **or** is predated by a stray dog? 
+
+$P(C \cup D) = P(C)+P(D)-P(C \cap D)$   
+
+$P(C \cap D)$ is the *joint* probabilty (intersection) of being both of a particular color and being predated by a stray dog. If the color of the sheep and predation by dogs are *independent* events (i.e. knowing about one event does not provide information about the other) then: 
+
+$P(C \cap D) = P(C)P(D)$  
+
+and thus
+
+Probability of being Black or Predated by Dog = 0.2+0.063-0.2x0.063 =`r 0.2+0.063-0.2*0.063`
+
+Probability of being White or Predated by Dog = 0.8+0.063-0.8x0.063 =`r 0.8+0.063-0.8*0.063`
+
+## Conditional probability {.build}
+ 
+Let's say we visit 100 alpine lakes and record if there is the presence of alien brook trout (*Salvelinus fontinalis*)  and of common frogs (*Rana temporaria*):  
+  
+Event F = Frog detection: probability to detect a frog during a visit   
+Event T = Trout presence: probability that a lake is inhabited by alien brook trout 
+
+/|Trouts|no Trouts|Total
+-|-----|-----|----
+Frogs|5  |35|40
+No Frogs|45 |15|60
+Total|50|50|100
+
+$P(T) = 50/100 = 0.5$  
+$P(F) = 40/100 = 0.4$ 
+$P(F \cap T) = 5/100 = 0.05$  
+
+## Conditional Probability {.build}
+
+What is the probability to find common frogs (*Rana temporaria*) in Alpine lakes in which there is the presence of brook trout?
+
+$P(F|T) = \frac{P(F \cap T)}{P(T)}$
+
+$P(F|T) =  0.05/0.5 = 0.1$
+
+So... what is the conditional probability to find frogs in lakes without brook trout?  
+
+$P(F|T_{no}) =  0.35/0.5 = 0.7$
+
+
+## Bayes' Theorem {.build}
+
+if   
+$P(A|B) = \frac{P(A \cap B)}{P(B)}$
+
+we can also write  
+$P(A \cap B) = P(A|B)P(B)$
+
+and   
+$P(B \cap A) = P(B|A)P(A)$
+
+and because  
+$P(A \cap B) = P(B \cap B)$  
+$P(B|A)P(A) = P(A|B)P(B)$
+
+re-arranging we get the **Bayes' Theorem**:  
+  
+$$\large{P(B|A) = \frac{P(A|B)P(B)}{P(A)}}$$
+
+## Bayes' Theorem {.build}
+
+What is the probability that there are brook trout in a lake if I found frogs? 
+
+$P(T|F) = \frac{P(F|T)P(T)}{P(F)}$
+
+$P(T|F) = \frac{0.1 \times 0.5}{0.4} = 0.125$
+
+
+
+
+
+
+
+
+
+
+
+
