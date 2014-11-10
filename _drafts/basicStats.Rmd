@@ -10,10 +10,123 @@ output:
     incremental: true
 ---  
 
-## Ok, we have got the data... and now?
+## Introducing the Dahu
   
-<iframe width="420" height="315" src="//www.youtube.com/embed/BBMVraJZoAU" frameborder="0" allowfullscreen></iframe>
-  
----  
-  
-## What is probabilty? {.build}
+<iframe width="420" height="315" src="//www.youtube.com/embed/BBMVraJZoAU" frameborder="0" allowfullscreen></iframe>  
+   
+## Ok, we have got the data... and now? {.build}
+
+Measures of **Central value:**
+
+*Mean*  
+
+*Median*
+
+*Mode*
+
+## The Mean {.build}
+
+$\large{\frac{\sum{x}}{n}}$    
+
+```{r}
+dahu.dat<-read.csv("dahu.csv")
+dahuM.dat<-subset(dahu.dat,Sex==1)
+```
+
+```{r}
+meanMR<-sum(dahuM.dat$R)/length(dahuM.dat$R)
+```
+
+```{r}
+meanMR
+``` 
+But of course there must be a function for this, right?  
+```{r}
+mean(dahuM.dat$R)
+```
+
+## The Median {.build}  
+
+The Median is the value dividing the sample exactly in half (in a sorted list of numbers).
+
+```{r}
+dahuM.dat<-dahuM.dat[order(dahuM.dat$R),]
+```
+ 
+```{r}
+length(dahuM.dat$R)/2
+```
+
+```{r}
+dahuM.dat$R[34]
+```
+
+```{r}
+median(dahuM.dat$R)
+```
+
+## The Normal distribution {.build} 
+
+The sample mean ($\overline{x} = 34.75$) and the median ($\tilde{x} = 35.13$) look very similar... why is that?  
+
+```{r}
+hist(dahuM.dat$R)
+```
+
+## The Normal distribution
+
+The sample mean ($\overline{x} = 34.75$) and the median ($\tilde{x} = 35.13$) look very similar... why is that?  
+
+```{r}
+hist(dahuM.dat$R,prob=T)
+```
+
+
+## The Normal distribution
+
+```{r}
+hist(dahuM.dat$R,prob=T)
+lines(density(rnorm(1000000,mean(dahuM.dat$R),sd(dahuM.dat$R))),col="red")
+```
+
+## The Normal distribution
+
+```{r}
+hist(dahuM.dat$R,prob=T)
+lines(density(rnorm(1000000,mean(dahuM.dat$R),sd(dahuM.dat$R))),col="red")
+segments(mean(dahuM.dat$R),0,mean(dahuM.dat$R),0.2,col="blue")
+```
+
+## The Normal distribution
+
+```{r}
+hist(dahuM.dat$R,prob=T)
+lines(density(rnorm(1000000,mean(dahuM.dat$R),sd(dahuM.dat$R))),col="red")
+segments(mean(dahuM.dat$R),0,mean(dahuM.dat$R),0.2,col="blue")
+segments(median(dahuM.dat$R),0,median(dahuM.dat$R),0.2,col="green")
+```
+
+## The Mode {.build}
+
+The mode is the number which appears most often in a sample (works with integers)
+```{r}
+x <- c(1,2,2,2,3,4,5,6,7,8,9)
+```
+
+```{r}
+temp <- table(as.vector(x))
+```
+
+```{r}
+names(temp)[temp == max(temp)]
+```
+
+## The Mode {.build}  
+
+For continous data in `R`: 
+```{r}
+library(modeest)
+mlv(dahuM.dat$R,method="mfv")
+```
+
+
