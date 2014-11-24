@@ -211,19 +211,259 @@ legend(0.3,44, c("Females","Males"),fill = c("pink", "lightblue"))
 
 
 
-## Variance and Standard deviation {.build}
-
-**Variance**   
+## Variance {.build}
   
-$\sigma^2=\frac{\sum{(x-\overline{x}})^2}{n}$
+$\sigma^2=\frac{\sum{(x-\overline{x}})^2}{n-1}$
 
-**Standard deviation**  
+```{r}
+var.dahu <- sum((dahu.dat$R-mean(dahu.dat$R))^2)/(length(dahu.dat$R)-1)
+var.dahu
+
+var(dahu.dat$R)
+```
+
+
+## Standard Deviation {.build}  
 
 $\sigma=\sqrt{\sigma^2}$
 
+Usefull property of the standard deviation is that it is expressed in the same units as the data, while the variance is not! (ex. in the dahu example  it is in $cm^2$ rather than in $cm$)
+
+```{r}
+sqrt(var(dahu.dat$R))
+
+sd(dahu.dat$R)
+```
 
 
+## Why square the differences? {.build}  
+![why square](~/Repos/ecostats.co/_drafts/whysquare1.tiff)  
+  
+... Taken from [www.mathisfun.com](http://www.mathsisfun.com/data/standard-deviation.html)
 
+## Why square the differences? {.build}  
+![why square](~/Repos/ecostats.co/_drafts/whysquare2.tiff)  
+Taken from [www.mathisfun.com](http://www.mathsisfun.com/data/standard-deviation.html)
+
+
+## Standard Error {.build}
+
+The *standard error of the mean* is a measure of the precision of the estimate of the true population mean given your sample.  
+  
+It dependes on the sample size
+
+$\large{SEM={\frac{\sigma}{\sqrt{n}}}}$  
+
+```{r}
+se.dahu<-sd(dahu.dat$R)/sqrt(length(dahu.dat$R))
+se.dahu
+mean(dahu.dat$R)
+```
+
+## Standard Error and Standard Devitation {.build}
+  
+"The **standard error** of the sample is an estimate of how far the sample mean is likely to be from the population mean, whereas the **standard deviation** of the sample is the degree to which individuals within the sample differ from the sample mean" (http://en.wikipedia.org/wiki/Standard_error).
+
+## The central limit theorem  
+
+<iframe width="420" height="315" src="//www.youtube.com/embed/JNm3M9cqWyc" frameborder="0" allowfullscreen></iframe>
+
+... http://www.khanacademy.org/
+
+
+## The central limit theorem {.build}  
+
+The **sampling distribution** of the sums of samples (and thus their means) taken from a population with any distribution, approximates a normal distribution    
+
+(the more the samples, the better the approximation!)
+```{r,eval=FALSE}
+par(mfrow=c(1,2))
+hist(dahu.dat$R)
+```
+  
+```{r,eval=FALSE}
+segments(mean(dahu.dat$R),0,mean(dahu.dat$R),40,col="red")
+```
+  
+```{r,eval=FALSE}
+samp<-seq(1,10000)
+for (i in 1:10000)
+{
+samp[i]<-mean(sample(dahu.dat$R,5,replace=T))
+}
+```
+  
+```{r,eval=FALSE}
+hist(samp)
+segments(mean(dahu.dat$R),0,mean(dahu.dat$R),2000,col="red")
+```
+
+## The central limit theorem {.build}
+
+```{r,echo=FALSE}
+par(mfrow=c(1,2))
+hist(dahu.dat$R)
+segments(mean(dahu.dat$R),0,mean(dahu.dat$R),40,col="red")
+samp<-seq(1,10000)
+for (i in 1:10000)
+{
+samp[i]<-mean(sample(dahu.dat$R,5,replace=T))
+}
+hist(samp)
+segments(mean(dahu.dat$R),0,mean(dahu.dat$R),2000,col="red")
+```
+
+## The central limit theorem {.build}
+
+```{r}
+mean(dahu.dat$R)
+mean(samp)
+```
+
+## The central limit theorem {.build}
+  
+```{r,eval=FALSE}
+par(mfrow=c(1,2))  
+rpop<-runif(10000)
+```
+  
+```{r,eval=FALSE}
+hist(rpop)
+segments(mean(rpop),0,mean(rpop),1000,col="blue",lwd=2)  
+```
+  
+```{r,eval=FALSE}
+samp2<-seq(1,10000)
+```
+  
+```{r,eval=FALSE}
+for (i in 1:10000)   
+{
+samp2[i]<-mean(sample(rpop,5,replace=T))
+} 
+```
+  
+```{r,eval=FALSE}
+hist(samp2)  
+segments(mean(rpop),0,mean(rpop),2000,col="blue",lwd=2)
+```
+
+## The central limit theorem {.build}
+```{r,echo=FALSE}
+par(mfrow=c(1,2))  
+rpop<-runif(10000)  
+hist(rpop)  
+segments(mean(rpop),0,mean(rpop),1000,col="blue",lwd=2)  
+samp2<-seq(1,10000)  
+for (i in 1:10000)  
+{
+samp2[i]<-mean(sample(rpop,5,replace=T))
+}  
+hist(samp2)  
+segments(mean(rpop),0,mean(rpop),2000,col="blue",lwd=2)
+
+```
+
+
+## Confidence intervals {.build}
+
+```{r, eval=FALSE}
+hist(dahu.dat$R)
+segments(mean(dahu.dat$R),0,mean(dahu.dat$R),2000,col="blue",lwd=2)
+```
+
+## Confidence intervals
+
+```{r, echo=FALSE}
+hist(dahu.dat$R)
+segments(mean(dahu.dat$R),0,mean(dahu.dat$R),2000,col="blue",lwd=2)
+```
+
+## Confidence intervals {.build}
+
+The **Confidence Interval** represent the interval of values between which a certain percentage of repeated samples (e.g. 95%) from a population include the true estimate (in our example, the mean) 
+  
+1. Any single sample mean is one of many possible sample means that might have been found for different random samples. All those other possible sample means form  **the sampling distribution of the mean**;  
+2. The sampling distribution of the mean is normal in shape, regardless of the shape of the population distribution (remember the Central Limit Theorem!);  
+3. The mean of the sampling distribution of the mean is the same as the population mean;  
+4. The standard deviation of the sampling distribution of the mean can be estimated by dividing the standard deviation of the sample by the square root of n (this is known as the Standard Error of the sample);   
+  
+http://www.gla.ac.uk/sums/users/lhornibrook/Sensor_Comparisons/confid3.html
+  
+
+## Confidence intervals {.build}  
+
+Let's add the 95% Confidence Intervals to the histogram of the right legs of Dahu. For this, we use the $z-score$, which is the number of standard deviation values which include the 95% of random samples
+
+```{r, eval=FALSE}
+se.dahu<-sd(dahu.dat$R)/sqrt(length(dahu.dat$R))
+sampCI.Plus<-mean(dahu.dat$R)+se.dahu*1.96
+sampCI.Minus<-mean(dahu.dat$R)-se.dahu*1.96
+```
+
+```{r, eval=FALSE}
+segments(sampCI.Plus,0,sampCI.Plus,30,col="green",lwd=2)
+segments(sampCI.Minus,0,sampCI.Minus,30,col="green",lwd=2)
+```
+
+## Confidence intervals
+
+```{r, echo=FALSE}
+hist(dahu.dat$R)
+segments(mean(dahu.dat$R),0,mean(dahu.dat$R),2000,col="blue",lwd=2)
+se.dahu<-sd(dahu.dat$R)/sqrt(length(dahu.dat$R))
+sampCI.Plus<-mean(dahu.dat$R)+se.dahu*1.96
+sampCI.Minus<-mean(dahu.dat$R)-se.dahu*1.96
+segments(sampCI.Plus,0,sampCI.Plus,30,col="green",lwd=2)
+segments(sampCI.Minus,0,sampCI.Minus,30,col="green",lwd=2)
+```
+
+## Confidence intervals {.build}  
+```{r}
+sampCI.Plus
+sampCI.Minus
+t.test(dahu.dat$R)
+```
+  
+## Confidence intervals {.build} 
+
+```{r,eval=FALSE}
+samp<-seq(1,100000)
+for (i in 1:100000)
+{
+samp[i]<-mean(sample(dahu.dat$R,100,replace=T))
+}
+hist(samp, prob=T)
+segments(mean(samp),0,mean(samp),2000,col="blue")
+lines(density(rnorm(1000000,mean(samp),sd(samp))),col="red")
+se.samp<-sd(samp)
+sampCI2.Plus<-mean(samp)+se.samp*1.96
+sampCI2.Minus<-mean(samp)-se.samp*1.96
+segments(sampCI.Plus,0,sampCI.Plus,0.3,col="green",lwd=2)
+segments(sampCI.Minus,0,sampCI.Minus,0.3,col="green",lwd=2)
+```
+
+## Confidence intervals
+
+```{r,echo=FALSE}
+samp<-seq(1,100000)
+for (i in 1:100000)
+{
+samp[i]<-mean(sample(dahu.dat$R,100,replace=T))
+}
+hist(samp, prob=T)
+segments(mean(samp),0,mean(samp),2000,col="blue")
+lines(density(rnorm(1000000,mean(samp),sd(samp))),col="red")
+se.samp<-sd(samp)
+sampCI2.Plus<-mean(samp)+se.samp*1.96
+sampCI2.Minus<-mean(samp)-se.samp*1.96
+segments(sampCI.Plus,0,sampCI.Plus,0.3,col="green",lwd=2)
+segments(sampCI.Minus,0,sampCI.Minus,0.3,col="green",lwd=2)
+```
+
+## Properties of the normal distribution
+
+<iframe frameborder="0" scrolling="no" width="560" height="355" src="https://www.khanacademy.org/embed_video?v=FXZ2O1Lv-KE" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
 
 
 
