@@ -237,12 +237,12 @@ sd(dahu.dat$R)
 
 
 ## Why square the differences? {.build}  
-![why square](~/Repos/ecostats.co/_drafts/whysquare1.tiff)  
+![why square](~/Repos/ecostats.co/_drafts/whysquare1.jpg)  
   
 ... Taken from [www.mathisfun.com](http://www.mathsisfun.com/data/standard-deviation.html)
 
 ## Why square the differences? {.build}  
-![why square](~/Repos/ecostats.co/_drafts/whysquare2.tiff)  
+![why square](~/Repos/ecostats.co/_drafts/whysquare2.jpg)  
 Taken from [www.mathisfun.com](http://www.mathsisfun.com/data/standard-deviation.html)
 
 
@@ -463,7 +463,7 @@ segments(sampCI.Minus,0,sampCI.Minus,0.3,col="green",lwd=2)
 
 ## Properties of the normal distribution
 
-<iframe frameborder="0" scrolling="no" width="560" height="355" src="https://www.khanacademy.org/embed_video?v=FXZ2O1Lv-KE" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
+<iframe width="420" height="315" src="//www.youtube.com/embed/FXZ2O1Lv-KE" frameborder="0" allowfullscreen></iframe>
 
 
 
