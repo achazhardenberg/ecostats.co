@@ -1,0 +1,228 @@
+---
+title: "Null-Hypothesis testing"
+subtitle: "Ecological Data Management and Analysis"
+author: "Achaz von Hardenberg"
+date: "1 Dec 2014"
+output:
+  ioslides_presentation:
+    widescreen: true
+    incremental: true
+---
+## What is a null-hypothesis test? {.build}
+
+As biologists, all the time we pose ourselves questions.   
+Questions such as:   
+  
+Is the mean length of the right leg of the Dahu really longer than the left leg?     
+  
+Or is the the difference we find in our sample of measures due to chance?    
+  
+This and other kind of questions (comparison of a single sample against an expected distribution, comparison between multiple samples, correlation between variables etc.), are the focus of what in Statistical inference is called **statistical hypothesis testing** or also **confirmatory data analysis** (distingushed from **Exploratory data analysis** in which no particular a-priori hypothesis is tested).  
+
+The tool used to reply to this kind of question is the **Null-hypothesis test**
+
+## First step: Null and alternative hypotheses {.build}
+
+**Are the right legs of Dahus longer than the left?**   
+
+$H_{0} = \mu_{R}=\mu_{L}$  
+$H_{1} = \mu_{R}>\mu_{L}$  
+  
+$H_{0} = \mu_{R}-\mu_{L}=0$    
+$H_{1} = \mu_{R}-\mu_{L}>0$ 
+
+The Null hypothesis is considered **True**, unless it's **rejected** by the alternative hypothesis
+
+## First step: Null and alternative hypotheses {.build}
+
+```{r}
+dahu.dat<-read.csv("dahu.csv")
+dahu.dat$diff<-dahu.dat$R-dahu.dat$L
+hist(dahu.dat$diff,prob=T,xlim=c(0,30))
+```
+
+## Student t-test {.build}
+
+$t=\frac{\overline{X}_{H_{1}}-\overline{X}_{H_{0}}}{\frac{sd}{\sqrt{n}}}$
+
+```{r}
+t<-mean(dahu.dat$diff-0)/(sd(dahu.dat$diff)/sqrt(length(dahu.dat$R))); t
+```
+
+## Student t-test {.build}
+
+t statistc follows the Student's t distribution 
+```{r}
+t.test(dahu.dat$diff)
+```
+
+## Student t-test {.build}
+
+```{r}
+t.test(dahu.dat$R,dahu.dat$L,paired=T) 
+```
+
+## Student t-test {.build}
+
+```{r}
+t.test(dahu.dat$diff~dahu.dat$Sex)
+```
+The **p-value** is the probability of obtaining the sample results if the Null hyphotesis is true (i.e. that the difference between right and left leg is the same in males and females). If the p-value is lower than a prespecified **significance level** ($\alpha$ level = 0.05), then we **reject** the Null hypothesis.
+
+## 5 common missunderstandings around P-values {.build}
+
+1. A null hypothesis can only be **rejected**: a high p-value does **not** mean that the null hypothesis is true!
+
+2. Conversely, a small p-value is **not** the probabilty that the alternative hypotheis is false.
+
+3. The significance level (0.05) is **not** determined by the p-value, but is arbitrary chosen by the researcher a-priori.
+
+4. The p-value is **not** the probability of getting the same result when replicating the study.
+
+4. P-value is not an indication of the **effect size**
+
+## Effect size {.build}
+
+The **effect size** is the quantitative measurement of the strength of a phenomenon.
+
+the mean difference, the correlation between two variables, the regression coefficient (the $\beta$ of the regression line) are all measures of effect size.  
+
+The larger the absolute value of the effect size, the stronger the effect.
+
+In a statistical test, the p-value may be lower than significance level, and thus making the researcher reject the null hypothesis, but still the effect size may be so low that it has actually no biological relevance!  
+
+**Don't look only to the p-value! Always consider also the relevance of the effect size (and the confidence intervals around it)!**
+
+## Type I and Type II errors {.build}
+
+**Type I error** is the probability to reject the Null-hypothesis when it is actually true:  
+
+*Considering an effect significant when it is actually not (false positive)*
+
+Type I error corresponds to the significance level!
+
+**Type II error** is the probability to fail to reject the Null-hypothesis when it is wrong:
+
+*Failing to detect a significant effect (false negative)* 
+
+
+## Power of a statistical test {.build}
+
+**Power** = 1 - Type II error
+
+It tells us the probability of finding a significant effect when it is true given a particular sample size
+
+```{r}
+power.t.test(delta=mean(dahu.dat$diff), sd=sd(dahu.dat$diff),power=0.8)
+```
+
+## Power of a statistical test {.build}
+```{r}
+chick.dat<-chickwts[11:36,]
+t.test(chick.dat$weight~chick.dat$feed)
+```
+
+## Power of a statistical test {.build}
+```{r}
+power.t.test(n=13,delta=mean(chick.dat$weight[1:12])-mean(chick.dat$weight[13:26]),
+    sd=sd(chick.dat$weight),sig.level=0.05)
+```
+
+## Power of a statistical test {.build}
+```{r}
+power.t.test(delta=mean(chick.dat$weight[1:12])-mean(chick.dat$weight[13:26]),
+  sd=sd(chick.dat$weight),sig.level=0.05, power=0.80)
+```
+
+**The lesson is:** we need to feed many more chicks to be reasonably sure that actually there is no difference between feeding lindseed or soybeen!
+
+## Checking for the Normality assumption {.build}
+
+The assumption of the t-test is that the sample of data comes from a normal population. We can use a test, like the Shapiro-wilk test, to test if our sample deviates significantly from a normal distribution
+
+```{r}
+shapiro.test(chick.dat$weight)
+```
+
+Our Null hypothesis is that the data conforms to what expected by a normal distribution, therefore a non-significant result is an indication that our data is aproximatelly normal (even thought not necessarily!)
+
+## Checking for the Normality assumption {.build}
+
+We can also check for normality graphically. The best way to do is is using a quantile-quantile normality plot (`qqnorm`)
+
+```{r, eval=F}
+par(mfrow=c(1,2))
+qqnorm(chick.dat$weight[chick.dat$feed=="linseed"])
+qqline(chick.dat$weight[chick.dat$feed=="linseed"], col="red")
+qqnorm(chick.dat$weight[chick.dat$feed=="soybean"])
+qqline(chick.dat$weight[chick.dat$feed=="soybean"], col="red")
+```
+
+## Checking for the Normality assumption 
+
+We can also check for normality graphically. The best way to do is is using a quantile-quantile normality plot (`qqnorm`)
+
+```{r, echo=F}
+par(mfrow=c(1,2))
+qqnorm(chick.dat$weight[chick.dat$feed=="linseed"])
+qqline(chick.dat$weight[chick.dat$feed=="linseed"], col="red")
+qqnorm(chick.dat$weight[chick.dat$feed=="soybean"])
+qqline(chick.dat$weight[chick.dat$feed=="soybean"], col="red")
+```
+
+## Checking for the Normality assumption {.build} 
+What does the `qqnorm` plot look like with not normally distributed data?
+```{r, fig.width=6, fig.height=4}
+test.dat<-runif(100,0,100)
+qqnorm(test.dat); qqline(test.dat, col="red")
+```
+
+
+## Tests for count data: The Chi-square test  {.build} 
+ 
+Ladybirds (*Adalia bipunctata*), can be red with black points, or black with red points. Does the frequency of the two type differ according of the area in which they live (**Industrial** or **Rural**)?     
+  
+Example taken from: *Beckerman and Petchey (2012) Getting started with R. An Introduction for Biologists. Oxford University Press*]
+
+```{r}
+ladybird.dat <- matrix(c(115, 30, 85, 70), 2, 2, byrow = TRUE, 
+        dimnames = list(c("Black","Red"), c("Industrial","Rural")))
+```
+  
+Color|Industrial|Rural|
+-|-----|-----|
+Black|115|30|
+Red|85 |70|
+
+## Tests for count data: The Chi-square test  {.build}  
+
+```{r}
+barplot(ladybird.dat,beside = TRUE, col=c("Black","Red"), ylim = c(0,125),legend = TRUE)                                   
+```
+
+## Tests for count data: The Chi-square test  {.build}  
+
+```{r}
+chisq.test(ladybird.dat)
+```
+
+## Tests for count data: Fisher's exact test  {.build}  
+
+If in any cell you have less than 10 cases, use Fisher's exact test
+
+```{r}
+ladybird2.dat <- matrix(c(12, 3, 9, 7), 2, 2, byrow = TRUE, 
+        dimnames = list(c("Black","Red"), c("Industrial","Rural")))
+```
+  
+Color|Industrial|Rural|
+-|-----|-----|
+Black|12|3|
+Red|9 |7|
+
+## Tests for count data: Fisher's exact test  {.build}  
+
+```{r}
+fisher.test(ladybird.dat)
+```
+
