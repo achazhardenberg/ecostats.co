@@ -5,8 +5,8 @@ author: "Achaz von Hardenberg"
 date: "1 Dec 2014"
 output:
   ioslides_presentation:
-    widescreen: true
-    incremental: true
+    incremental: yes
+    widescreen: yes
 ---
 ## What is a null-hypothesis test? {.build}
 

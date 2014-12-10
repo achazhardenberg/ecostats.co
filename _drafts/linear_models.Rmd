@@ -1,0 +1,265 @@
+---
+title: "Classical Linear Models"
+subtitle: "Ecological Data Management and Analysis"
+author: "Achaz von Hardenberg"
+date: "1 Dec 2014"
+output:
+  ioslides_presentation:
+    incremental: yes
+    widescreen: yes
+---
+
+## Correlation {.build} 
+
+The correlation coefficient tells us the strength of the linear association between two variables. 
+
+```{r, echo=F}
+par(mfrow=c(1,3))
+
+plot(rev(seq(1:20))~seq(1:20), xlab="X",ylab="Y")
+title("r = -1")
+
+a<-rnorm(50,10,10)
+b<-rnorm(50,10,10)
+plot(a~b, xlab="X",ylab="Y")
+title("r = 0")
+
+plot((seq(1:20))~seq(1:20), xlab="X",ylab="Y")
+title("r = 1")
+```
+
+## Pearson's correlation coefficient {.build} 
+
+$r = \frac{\sum(x-\overline{x})(y-\overline{y})}{\sqrt{\sum(x-\overline{x})^2 (y-\overline{y})^2}}$
+
+```{r, echo=F}
+setwd("~/Repos/ecostats.co/_drafts")
+dahu.dat<-read.csv("dahu.csv")
+```
+
+```{r}
+cor.test(dahu.dat$R,dahu.dat$L)
+```
+
+## Pearson's correlation coefficient {.build} 
+
+```{r}
+plot(dahu.dat$R,dahu.dat$L)
+```
+
+## Linear regression {.build} 
+
+In linear regression we imply that one variable (X) is a **predictor** of variable Y (the **dependent** or **response** variable). x is also called **indipendent** or **explanatory** variable
+
+$Y_{i} = \alpha + \beta X_{i} +\epsilon_{i}$  
+
+$\epsilon = N(0,\sigma^2)$
+
+```{r}
+dahu.lm<-lm(dahu.dat$L~dahu.dat$R)
+dahu.lm
+```
+
+## Linear regression {.build} 
+
+```{r}
+summary(dahu.lm)
+```
+
+## Linear regression {.build} 
+
+```{r, fig.width=10,fig.height=4}
+par(mfrow=c(1,4))
+plot(dahu.lm)
+```
+http://strata.uga.edu/6370/rtips/regressionPlots.html
+
+## Do storks deliver babies? {.build} 
+
+http://www.mpcm-evolution.org/practice/online-practical-material-chapter-8
+
+```{r}
+storks.dat <- read.csv("storks.csv")
+head(storks.dat)
+```
+
+## Do storks deliver babies? {.build} 
+
+```{r comment=NA, tidy=TRUE,fig.width=5, echo=F}
+with(storks.dat,plot(Birth~Storks, xlab="Number of breeding stork pairs", ylab="Human birth rate (thousands/year)"))
+storks.lm<-lm(Birth~Storks,data=storks.dat)
+abline(storks.lm)
+```
+
+## Do storks deliver babies? {.build} 
+
+```{r comment=NA, tidy=TRUE, fig.width=8}
+summary(storks.lm)
+```
+
+## Do storks deliver babies? {.build} 
+
+```{r comment=NA, tidy=TRUE, fig.width=10,echo=F}
+par(mfrow = c( 1,2))
+
+with(storks.dat,plot(Birth~Area))
+title("a",adj=0)
+storks2.lm<-lm(Birth~Area,data=storks.dat)
+abline(storks2.lm)
+
+with(storks.dat,plot(Storks~Area))
+title("b",adj=0)
+storks3.lm<-lm(Storks~Area,data=storks.dat)
+abline(storks3.lm)
+```
+
+## Do storks deliver babies? {.build} 
+
+```{r}
+storks2.lm<-lm(Birth~Area,data=storks.dat)
+summary(storks2.lm)
+```
+
+## Do storks deliver babies? {.build} 
+```{r}
+storks3.lm<-lm(Storks~Area,data=storks.dat)
+summary(storks3.lm)
+```
+
+## Forcing the intercept through the origin {.build} 
+```{r}
+storks4.lm<-lm(Storks~Area-1,data=storks.dat)
+summary(storks4.lm)
+```
+
+
+## Do storks deliver babies? {.build}   
+Country area seems indeed to be strongly correlated both to human birth rate and the number of stork pairs. Let's thus see what happens when we statistically control for the effect of the confounding variable Area when we include this variable in the model of the relationship between Storks and Birth:
+
+
+```{r comment=NA, tidy=TRUE,eval=F}
+summary(lm(Birth~Area+Storks,data=storks.dat))
+```
+
+## Do storks deliver babies?
+```{r comment=NA, tidy=TRUE,echo=F}
+summary(lm(Birth~Area+Storks,data=storks.dat))
+```
+
+
+## Multiple regression {.build} 
+
+```{r comment=NA, tidy=TRUE,eval=F}
+lm(Birth~Area+Storks,data=storks.dat)
+```
+
+$Y_{i} = \alpha + \beta_{1} X_{1i} + \beta_{2} X_{2i} + \epsilon_{i}$  
+
+## Polynomial regression {.build} 
+
+Polynomial regression fits a nonlinear relationship between the value of x and y. The regression function for the unknown estimated parameters, however is linear, and thus polynomial regression can be seen as a special case of multiple regression:
+
+$Y_{i} = \alpha + \beta_{1} X_{i} + \beta_{2} X_{i}^2 +\epsilon_{i}$ 
+
+http://datadryad.org/resource/doi:10.5061/dryad.8kb87
+
+```{r, echo=F}
+setwd("~/Repos/ecostats.co/_drafts")
+```
+
+```{r}
+hfc.dat<-read.table("HFC_2013_standardizzato.txt",header=T)
+```
+
+```{r, eval=F}
+hfc.lm<-lm(hfc.dat$st_weight~hfc.dat$st_age,na.action=na.omit)
+summary(hfc.lm)
+```
+
+## A quadratic regression {.build} 
+
+```{r, echo=F}
+hfc.lm<-lm(hfc.dat$st_weight~hfc.dat$st_age,na.action=na.omit)
+summary(hfc.lm)
+```
+
+
+## A quadratic regression {.build} 
+
+```{r, eval=F}
+hfc2.lm<-lm(hfc.dat$st_weight~hfc.dat$st_age+I(hfc.dat$st_age^2),na.action=na.omit)
+summary(hfc2.lm)
+```
+
+
+---  
+```{r, echo=F, tidy=TRUE}
+hfc2.lm<-lm(hfc.dat$st_weight~hfc.dat$st_age+I(hfc.dat$st_age^2),na.action=na.omit)
+summary(hfc2.lm)
+```
+
+
+## The R-squared coefficient of determination {.build}
+  
+The R-squared coefficient represents the percentage of the variation in the response variable explained by the linear model  
+
+ R-squared = Explained variation / Total variation  
+
+http://blog.minitab.com/blog/adventures-in-statistics/regression-analysis-how-do-i-interpret-r-squared-and-assess-the-goodness-of-fit
+
+
+## The R-squared coefficient of determination {.build} 
+
+<iframe frameborder="0" scrolling="no" width="560" height="355" src="https://www.khanacademy.org/embed_video?v=lng4ZgConCM" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
+
+
+## Analysis of Variance (ANOVA) {.build}
+
+Analysis of Variance (ANOVA) is a generalization of classical linear models, in which the independent variables are factors instead of continous variables
+
+```{r}
+dahu.dat$Sex<-as.factor(dahu.dat$Sex)
+dahu2.lm<-lm(dahu.dat$L~dahu.dat$Sex)
+```
+
+## Analysis of Variance (ANOVA) {.build}
+
+```{r}
+summary(dahu2.lm)
+```
+
+## Analysis of Variance (ANOVA) {.build}
+
+```{r}
+hfc.dat$year<-as.factor(hfc.dat$year)
+hfc3.lm<-lm(hfc.dat$st_weight~hfc.dat$year)
+```
+
+## Analysis of Variance (ANOVA) {.build}
+
+```{r}
+summary(hfc3.lm)
+```
+
+
+## Analysis of Variance (ANOVA) {.build}
+
+```{r}
+anova(hfc3.lm)
+```
+
+## Analysis of Variance (ANOVA) {.build}
+
+```{r, eval=F}
+hfc.dat$year<-as.factor(hfc.dat$year)
+hfc3.lm<-lm(hfc.dat$st_weight~hfc.dat$year-1)
+summary(hfc3.lm)
+```
+  
+---
+```{r, echo=F}
+hfc3.lm<-lm(hfc.dat$st_weight~hfc.dat$year-1)
+summary(hfc3.lm)
+```
+
+
