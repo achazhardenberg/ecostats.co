@@ -1,0 +1,114 @@
+---
+title: "Maximum likelihood"
+author: "Achaz von Hardenberg"
+date: "14 Dec 2014"
+output: ioslides_presentation
+---
+
+## Maximum Likelihood estimation {.build} 
+
+For a particular statistical model, **maximum likelihood** finds the set of *parameters* (the intercept \alpha and the coefficients \beta for example) that make the observed data **most likely to have occurred**
+
+These estimated parameters are thus the **Maximum likelihood estimates** of our statistical model.  
+
+For linear regression, the maximum likelihood estimates, are equivalent to the ordinary least squares estimates.
+
+## Maximum likelihood {.build} 
+
+**Frogs in Lakes**
+
+n = 11     *Total number of visited lakes*  
+y = 7      *Lakes with frogs*  
+(n-y) = 4  *Lakes without frogs*  
+  
+p      *Probability to find a frog in a lake*  
+(1-p)  *Probabilty not to find a frog*  
+  
+$L$ $\alpha$ $ppppppp(1-p)(1-p)(1-p)(1-p)$  
+  
+$L$ $\alpha$ $p^y (1-p)^{(n-y)}$  
+
+$L$ $\alpha$ $p^7 (1-p)^4$
+
+$L(p|n,y)= \frac{n!}{y!(n-y)!}p^y (1-p)^{(n-y)}$
+
+
+## Maximum likelihood {.build} 
+
+$L(p|n,y)= \frac{n!}{y!(n-y)!}p^y (1-p)^{(n-y)}$
+
+```{r}
+f<-factorial(11)/(factorial(7)*factorial(4))
+p<-0.5
+L<-f*p^7*(1-p)^4
+```
+
+## Maximum likelihood {.build}
+
+![figure maxlik](~/Repos/ecostats.co/_drafts/maxlik.jpg)
+
+
+Likelihood (p=0.5) = `r L`    
+Likelihood (p=0.7) = `r f*0.7^7*(1-0.7)^4`  
+Likelihood (p=0.8) = `r f*0.8^7*(1-0.8)^4`  
+
+
+## Maximum likelihood {.build}  
+```{r}
+storks.dat<-read.csv("storks.csv")
+storks.lm<-lm(Birth~Storks, data=storks.dat)
+```
+
+```{r}
+summary(storks.lm)
+```
+
+## Maximum likelihood {.build}
+```{r}
+logLik(storks.lm)
+```
+
+## Maximum likelihood {.build}
+```{r}
+storks.glm<-glm(Birth~Storks, data=storks.dat)
+```
+
+```{r, eval=F}
+summary(storks.glm)
+```
+
+## Maximum likelihood
+
+```{r, echo=F}
+summary(storks.glm)
+```
+
+## Maximum likelihood {.build}
+
+```{r}
+logLik(storks.glm)
+```
+
+
+## Generalized Linear Models {.build}
+
+We can use generalized linear models to model dependent variables with non normal distribution of their errors (Binomial, Poisson, etc.).
+
+Formulation is the same as for the linear model, but a link-function links the (linear) relationship between the covariates and the response variable with error distribution different than normal.
+
+**Binomial model (Logistic regression)**
+
+$logit(p) = \alpha + \beta_{1} X_{1i} + \beta_{2} X_{2i} + \epsilon_{i}$  
+  
+$logit(p) = log(\frac{p}{1-p})$
+
+## Logistic regression {.build}
+
+http://lizmartinresearch.wordpress.com/2013/12/02/beginners-r-generalized-linear-models/
+
+http://ww2.coastal.edu/kingw/statistics/R-tutorials/logistic.html
+
+
+## Modeling count data with glm {.build}
+
+http://www.petrkeil.com/?p=1709
