@@ -1,0 +1,48 @@
+---
+title: "Model Selection and AIC"
+author: "Achaz von Hardenberg"
+date: "19 Dec 2014"
+output:
+  ioslides_presentation:
+    incremental: yes
+    widescreen: yes
+---
+
+## Aikaike Information Criterion (AIC) {.build}
+
+The Akaike Information Criterion (AIC)  is a method to select the *relatively* best fitting model in a set of models.
+
+It is a Information Theory approach, in which we try to minimize the Kullback–Leibler (K-L) information loss.
+
+$AIC = -2ln(Likelihood) + 2 K$  
+
+K is the number of free parameters in the model  
+
+AIC scores by themselves do not have any meaning. But we can compare the difference between the best model (smallest AIC) and each alternative model as ∆AIC (where the best model has a ∆AIC of zero).
+
+## Corrected Aikaike Information Criterion (AICc) {.build}
+
+A version of the AIC for small samples is the corrected AIC (AICc):  
+
+$AICc = -2ln(Likelihood) + 2 K \frac{n}{n - K - 1}$ 
+
+Where n is the sample size.
+
+AICc corrects for small sample sizes. But with large sample size, AICc converges to AIC ( when n is large, $\frac{n}{n-K-1}$  approaches 1)
+
+
+## Strength of evidence {.build}
+
+We consider our best fitting model the model with the smallest value of AIC (∆AIC=0), but models within ∆AIC < 2, have still a substantial support and are thus considered equivalent.
+
+A model with ∆AIC of 2 is 2.7 times less likely than the best fitting model. 
+
+http://wolfweb.unr.edu/~ldyer/classes/396/burnham2011.pdf
+
+## AIC model selection in R {.build}
+
+packages 'MuMIn' (Multi Model Inference) and 'glmulti'
+
+http://www.r-bloggers.com/model-selection-and-multi-model-inference/
+
+
