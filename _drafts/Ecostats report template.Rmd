@@ -1,0 +1,89 @@
+---
+title: 'Here put a nice title for your report: it should say something about your
+  question or your most important result'
+author: "Your name comes here"
+date: "18 Jan 2015"
+output:
+  word_document:
+    fig_caption: yes
+---
+
+**Introduction** 
+
+In this section introduce the problem and the data you are going to analyze. Cite relevant literature like this (Matthews 2000). All the reference you cite should appear in the **Literature cited** section at the end of your report. If you use this template in RStudio, you can transform your report into a word file, simply pressing the button "Knit Word" in the bar above. If you need help with the Markdown language, click on the "?" button next to the "Knit Word"" button above. 
+To make sure that your next paragraph starts on the following line, leave two spaces after the paragraph (for example after the title of each section).
+
+**Methods**  
+  
+*Data*  
+Provide details about the origin of the data you are analyzing. If you collected the data on your own, please provide sufficient detail to understand how, where and in which context you collected it (was this data collected for your thesis? Did you collect it especially for this project? etc.). If the data was obtained from an other source please give details about how and from where it was obtained. If you downloaded it from the internet plese provide and cite the original source providing as well the exact link from where you downloaded it. 
+
+You should also provide a brief, but accurate, description of all the variables included in your analysis. You want to make sure that I clearly can understand what you were trying to do and why. And if I do not understand what the variables you included in your analysis are, it will be very difficoult for me to evaluate your work.   
+  
+*Statistical methods*
+Describe briefly the statistical methods you used for your analysis. Specify what kind of method you used and for what, specifying as well the function and packages you used in R. E.g.: "I used simple linear regression to analyze the relationship between number of breeding stork pairs and the human birth rate in European countries. All analyses were conducted in the statistical environment R version 3.0.2. (R Core Team 2014). For linear regression I used the function "lm" in the {stats} package". 
+
+**Results**
+This is the most important part of your report. Please try to write down exactly what you did and why, providing all the code you used to perform your analysis and as well to generate your plots. Include your code in code chunks like in the example below.  
+
+E.g.
+
+As shown also by Matthews (2000), the number of breeding pairs in European countries, is positivelly related to the human birth rate in those countries (Fig. 1)
+
+```{r}
+storks.dat <- read.csv("storks.csv") 
+with(storks.dat, plot(Birth~Storks, xlab="Number of breeding stork pairs", ylab="Human birth rate (thousands/year)", main="Fig.1"))
+storks.lm<-lm(Birth~Storks,data=storks.dat)
+abline(storks.lm)
+```
+
+The linear regression between number of storks (Storks) and human birth rates (Birth) appears to be highly significant (Beta= ..., s.e. = ..., df= ... , p-value = ....; Fig. 2a): 
+
+```{r}
+summary(storks.lm)
+```
+
+However, it can be shown that Birth is also significantly related to a third variable (Area; Beta= ..., s.e. = ..., df= ... , p-value = .... ):   
+
+```{r}
+storks2.lm<-lm(Birth~Area,data=storks.dat)
+summary(storks2.lm)
+```
+
+A significant relationship can be also shown regressing Storks vs. Area (Beta= ..., s.e. = ..., df= ... , p-value = ....; Fig. 2b):
+
+```{r}
+storks3.lm<-lm(Storks~Area,data=storks.dat)
+summary(storks3.lm)
+```
+
+```{r}
+par(mfrow = c( 1,2))
+
+with(storks.dat,plot(Birth~Area))
+title("Fig. 2a",adj=0)
+abline(storks2.lm)
+
+with(storks.dat,plot(Storks~Area))
+title("Fig 2b",adj=0)
+abline(storks3.lm)
+```
+
+Country area seems indeed to be strongly correlated both to human birth rate and the number of stork pairs. I thus explored what happens when we statistically control for the effect of the confounding variable Area, including this variable in the model of the relationship between Storks and Birth:
+
+```{r comment=NA, tidy=TRUE}
+storks4.lm<-lm(Birth~Area+Storks,data=storks.dat)
+summary(storks4.lm)
+```
+
+In the above analysis it appears clear that when we statistically control for Area, which is probably affecting indipendently both Storks and Birth, the effect of Storks on Birth appears to be actually not significant (Beta= ..., s.e. = ..., df= ... , p-value = ....)
+
+**Discussion**
+
+In the discussion you should briefly discuss your results. Pinpoint what they add to what you previously knew (from the literature or from your own hypotheses or observations) about the biological problem and scientific question you wanted to analyze and which you had presented in the introduction. It's a good idea to start your discussion with a very syntetic summary of your results. Please cite all relevant literature, and try interpret your results for their biological more than for their statistical relevance here. 
+
+**Literaure cited**  
+  
+Matthews (2000). Storks Deliver Babies (p=0.008). *Teaching Statistics 22(2):36-38*
+  
+R Core Team (2014). *R: A language and environment for statistical computing*. R Foundation for Statistical Computing, Vienna, Austria. URL: http://www.R-project.org/.

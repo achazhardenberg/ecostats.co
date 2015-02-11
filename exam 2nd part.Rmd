@@ -1,0 +1,20 @@
+---
+output: pdf_document
+---
+  
+11. **What information can you get out of the following plots? Please analyse and interpret what you see in this specific case**  
+
+```{r, fig.height=7, echo=F}
+dat1<-runif(100,1,10)
+dat2<-runif(100,1,10)
+test1<-lm(dat2~dat1)
+par(mfrow=c(2,2))
+plot(test1)
+```
+
+
+12. **What are Type I and Type II errors?** 
+
+
+
+

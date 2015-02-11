@@ -1,0 +1,115 @@
+---
+title: "Ecological Data Management and Analysis"  
+author: "Written Exam"
+date: "2 February 2015"
+output: pdf_document
+---
+
+**Name: _______________ Surname: _______________ Matricola N° _____**  
+   
+*Instructions*  
+    
+The written part of the exam consists of multiple choice and open questions as well as an exercise to be done within the statistical environment "R". The written exam will represent 40 % of the final mark (calculated in 30/30). You can therefore get a maximum score of 40 points in this exam, in which each correct multiple choice reply gives you 2 points, Open questions can get a maximum of 5 points, while the correct completition of the R exercise has a value of 10 points.  
+  
+
+1. **You have a variable, represented by 5 data points: 23.4, 46.7, 56.4, 45.0, 35.9. What definition best describes this data?**  
+
+$\bigcirc$ the data is continous  
+  
+$\bigcirc$ the data is discrete  
+  
+$\bigcirc$ the data is binomial  
+  
+$\bigcirc$ the data is count data   
+
+  
+2. **If predation by fox (F), puma (P) or stray dogs (D) are  mutually exclusive events, what is the probability to be predated by a fox or by a dog?**
+  
+$\bigcirc P(F)*P(D)$  
+  
+$\bigcirc P(F)+P(D)$ 
+  
+$\bigcirc P(F)+P(D)-P(F \cap D)$  
+  
+$\bigcirc \frac{P(F \cap D)}{P(P)}$
+  
+3. **Which of the following is the formula of the Variance?**
+ 
+$\bigcirc \sqrt{\sigma^2}$ 
+  
+$\bigcirc \frac{\sum{(x-\overline{x}})^2}{n-1}$  
+  
+$\bigcirc \frac{\sigma}{\sqrt{n}}$  
+  
+$\bigcirc \large{\frac{\sum{x}}{n}}$
+
+4. **What is the Mode?**  
+  
+$\bigcirc$ The mode is the number which appear less often in a sample   
+  
+$\bigcirc$ The mode is the mean of the numbers in a sample   
+  
+$\bigcirc$ The mode is the second quantile of a sample  
+  
+$\bigcirc$ The mode is the number which appears most often in a sample  
+  
+    
+5. **What is the p-value?**
+
+$\bigcirc$ The *p-value* is the probability of obtaining the sample results if the Null hyphotesis is false  
+  
+$\bigcirc$ The *p-value* is the probability of obtaining the sample results if the Null hyphotesis is true  
+  
+$\bigcirc$ The *p-value* is the probability of obtaining the sample results if the Alternative hyphotesis is false   
+  
+$\bigcirc$ The *p-value* is the probability of obtaining the sample results if the Alternative hyphotesis is true  
+  
+6. **What is the r-squared coefficient?**  
+
+$\bigcirc$ The R-squared coefficient represents the percentage of the variation in the response variable explained by the linear model   
+
+$\bigcirc$ The R-squared coefficient represents the strength of the linear association between two variables  
+  
+$\bigcirc$ The R-squared coefficient represents the value of the slope in a linear regression 
+
+$\bigcirc$ The R-squared coefficient represents the value of the intercept in a linear regression  
+  
+7. **What kind of regression model would be appropriate to analyse a response variable with values which can be or 0 or 1 (e.g. presence/absence or survival data)**
+
+$\bigcirc$ An ordinary least squares regression model  
+  
+$\bigcirc$ A generalized linear model with a Poisson distribution of the errors  
+  
+$\bigcirc$ A logistic regression model  
+  
+$\bigcirc$ A Chi-square test  
+   
+8. **Which of the following sentences is false?**
+
+$\bigcirc$ The Akaike Information Criterion (AIC) is a method to select the relatively best fitting model in a set of models.  
+  
+$\bigcirc$ The model with the highest value of AIC is the best fitting model  
+  
+$\bigcirc$ Models within $\delta$ AIC < 2 are considered equivalent  
+  
+$\bigcirc$ AICc corrects for small sample sizes. But with large sample size, AICc converges to AIC  
+
+9. **In which of the following situations is it appropriate to use a linear mixed model?** 
+  
+$\bigcirc$ In the case of data following a Poisson distribution  
+
+$\bigcirc$  In the case of data following a mixed distribution  
+  
+$\bigcirc$ In the case of data in which there are repeated measurements of the same individuals 
+  
+$\bigcirc$  In none of the above situations 
+
+10. **Which of the following definitions is true?**
+  
+$\bigcirc$  The 95% *confidence interval* is the interval of values between which has a 95% probability to include the true estimate  
+  
+$\bigcirc$  The 95% *confidence interval* is the interval of values between which 95% of repeated samples from a population include the true estimate  
+   
+$\bigcirc$  The 95% *confidence interval* is a measure of dispersion representing the interval which includes 95% of all values of the sample 
+  
+$\bigcirc$  None of the above

@@ -1,0 +1,21 @@
+---
+title: "Ecological Data Management and Analysis"  
+author: "Written exam: R Exercise"
+date: "2 February 2015"
+output: pdf_document
+---
+
+You will use the dataset "iris" (You already have it in the library "datasets"). Get to know more about it searching for "iris" with the help function. You will have to provide me your R code of your analysis, as well as the releavant output in a separate file (please comment your output briefly if appropriate)
+  
+1. Make separate plots of the relationship between Petal length and Sepal length in the three species.
+
+2. Draw a regression line for each plot (colour them in red)
+  
+3. Test if there is a difference in Petal length among the 3 iris  species. Provide the output of your analysis and comment briefly on it 
+
+
+ 
+
+
+
+
